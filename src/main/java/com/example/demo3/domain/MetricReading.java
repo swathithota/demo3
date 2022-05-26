@@ -1,9 +1,8 @@
 package com.example.demo3.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -11,8 +10,11 @@ import java.util.List;
 public class MetricReading {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "MESSAGE_GEN")
+    @GeneratedValue(generator = "prod-generator")
+    @GenericGenerator(name = "prod-generator", strategy = "com.example.demo3.generator.MessageIDGenerator")
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    public long id;
 
     private String sensorId;
 
